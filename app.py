@@ -217,6 +217,10 @@ def generate_response():
         contents=[prompt_conceptual]
     )
 
+    titulo_concepto = ""
+    interpretacion_poetica = ""
+    prompt_para_sdxl = ""
+
     respuesta_bruta = text_response.text.strip()
 
     # Separar la respuesta en partes

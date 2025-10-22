@@ -5,333 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Generador de Arte Emocional</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            min-height: 100vh;
-            padding: 20px;
-            color: #2d3748;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            height: 100vh;
-            margin-top: 3rem;
-        }
-
-        .left_column {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .right_column {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .card {
-            background: white;
-            border-radius: 12px;
-            padding: 24px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .card_title {
-            display: flex;
-            align-items: center;
-            gap: 7px;
-            font-size: 18px;
-            font-weight: 600;
-            color: #2d3748;
-            margin-bottom: 20px;
-
-        }
-
-        .icon {
-            width: 24px;
-            height: 24px;
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 20px;
-        }
-
-        .form_entryInput {
-            margin-bottom: 20px;
-        }
-
-        .form_label {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-weight: 500;
-            margin-bottom: 8px;
-            color: #4a5568;
-        }
-
-        .label_icon {
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 10px;
-            color: white;
-        }
-
-        .heart { background: #e53e3e; }
-        .wave { background: #3182ce; }
-
-        .form_input, .form-select {
-            width: 100%;
-            padding: 12px 16px;
-            border: 2px solid #e2e8f0;
-            border-radius: 8px;
-            font-size: 14px;
-            transition: all 0.2s ease;
-            background: white;
-        }
-
-        .form_input:focus, .form-select:focus {
-            outline: none;
-            border-color: #8A2BE2;
-            box-shadow: 0 0 0 3px rgba(138, 43, 226, 0.1);
-        }
-
-        .generate_btn {
-            width: 100%;
-            padding: 16px;
-            background: linear-gradient(135deg, #8A2BE2 0%, #4682B4 100%);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .generate_btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(138, 43, 226, 0.3);
-        }
-
-        
-
-        .check-icon {
-            color: #38a169;
-        }
-
-        .image_container {
-            position: relative;
-            border-radius: 8px;
-            overflow: hidden;
-            background: #f7fafc;
-        }
-
-        .generated_image {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-            border-radius: 8px;
-        }
-
-        .download_btn {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            background: rgba(45, 55, 72, 0.8);
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 6px;
-            font-size: 12px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .audio_player {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            padding: 20px;
-            background: #f7fafc;
-            border-radius: 8px;
-        }
-
-        .play_btn {
-            width: 48px;
-            height: 48px;
-            background: linear-gradient(135deg, #8A2BE2 0%, #4682B4 100%);
-            border: none;
-            border-radius: 50%;
-            color: white;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-        }
-
-        .progress_bar {
-            flex: 1;
-            height: 6px;
-            background: #e2e8f0;
-            border-radius: 3px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .progress_fill {
-            height: 100%;
-            background: linear-gradient(135deg, #8A2BE2 0%, #4682B4 100%);
-            width: 0%;
-            border-radius: 3px;
-        }
-
-        .time_display {
-            font-size: 14px;
-            color: #718096;
-            min-width: 80px;
-            text-align: center;
-        }
-
-        .volume_control {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .volume_slider {
-            width: 60px;
-    height: 8px;
-    background: #e2e8f0;
-    border-radius: 2px;
-    position: relative;
-    cursor: pointer;
-        }
-
-        .volume_fill {
-            height: 100%;
-            background: linear-gradient(135deg, #8A2BE2 0%, #4682B4 100%);
-            width: 60%;
-            border-radius: 2px;
-        }
-
-        button#btn-lang {
-    border: 1px solid lightgray;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 7px;
-    padding-bottom: 6px;
-    width: 2.5rem;
-    height: 2.5rem;
-    font-size: 24px;
-    cursor: pointer;
-    background: none;
-}
-        .interpretation_text {
-            line-height: 1.6;
-            color: #4a5568;
-            font-size: 14px;
-        }
-
-        .interpretation_text strong {
-            color: #2d3748;
-            font-weight: 600;
-        }
-
-        .card-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 20px;
-            padding-top: 16px;
-            border-top: 1px solid #e2e8f0;
-        }
-
-        .timestamp {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 12px;
-            color: #a0aec0;
-        }
-
-        .action-buttons {
-            display: flex;
-            gap: 8px;
-        }
-
-        .action-btn {
-            padding: 8px 16px;
-            border: 1px solid #e2e8f0;
-            background: white;
-            border-radius: 6px;
-            font-size: 12px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.2s ease;
-        }
-
-        .action-btn:hover {
-            background: #f7fafc;
-            border-color: #cbd5e0;
-        }
-
-        .copy-btn {
-            color: #8A2BE2;
-        }
-
-        .download_btn svg {
-            width: 17px;
-            height: 17px;
-        }
-
-        .placeholder {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 200px;
-            color: #a0aec0;
-            font-size: 14px;
-            border: 2px dashed #e2e8f0;
-            border-radius: 8px;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="static/css/index.css">
 </head>
 <body>
     <div class="container">
-        <!-- Columna Izquierda -->
         <div class="left_column">
             <div class="card">
                 <div style="display: flex;">
@@ -345,16 +22,16 @@
                         </button>
                     </div>
                 </div>
-               
                 
                 <form method="POST" action="/generate">
                     <input type="hidden" name="lang" id="current-lang-input" value="en">
+                    
                     <div class="form_entryInput">
                         <label class="form_label">
                             <div class="label_icon heart"></div>
                             Emoción
                         </label>
-                        <input type="text" name="emocion" class="form_input" value="{{ input_emocion if input_emocion else '' }}"  required>
+                        <input type="text" name="emocion" class="form_input" value="{{ input_emocion if input_emocion else '' }}" required>
                     </div>
 
                     <div class="form_entryInput">
@@ -362,18 +39,15 @@
                             <div class="label_icon wave"></div>
                             Elemento
                         </label>
-                        <input type="text" name="elemento" class="form_input" value="{{ input_elemento if input_elemento else '' }}"  required>
+                        <input type="text" name="elemento" class="form_input" value="{{ input_elemento if input_elemento else '' }}" required>
                     </div>
 
                     <button type="submit" class="generate_btn">Generar Arte</button>
                 </form>
-
             </div>
         </div>
 
-        <!-- Columna Derecha -->
         <div class="right_column">
-            <!-- Imagen Generada -->
             <div class="card">
                 <div class="card_title">
                     <div class="icon">🖼️</div>
@@ -384,13 +58,12 @@
                 <div class="image_container">
                     <img src="{{ dream_url }}" alt="Arte Generado" class="generated_image">
                     <button class="download_btn">
-                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round">
-                       <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                       <polyline points="7 10 12 15 17 10" />
-                       <line x1="12" y1="15" x2="12" y2="3" />
-                   </svg>Descargar
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <polyline points="7 10 12 15 17 10" />
+                            <line x1="12" y1="15" x2="12" y2="3" />
+                        </svg>
+                        Descargar
                     </button>
                 </div>
                 {% else %}
@@ -400,9 +73,6 @@
                 {% endif %}
             </div>
 
-        
-
-            <!-- Interpretación de Gemini AI -->
             <div class="card">
                 <div class="card_title">
                     <div class="icon">🧠</div>
@@ -416,7 +86,7 @@
                 
                 <div class="card-footer">
                     <div class="timestamp">
-                        🕒 Generado hace  minutos
+                        🕒 Generado hace minutos
                     </div>
                     <div class="action-buttons">
                         <button class="action-btn copy-btn">🔗 Copiar</button>
@@ -429,8 +99,6 @@
                 {% endif %}
             </div>
 
-
-            <!-- Narración de Audio -->
             <div class="card">
                 <div class="card_title">
                     <div class="icon">🔊</div>
@@ -440,7 +108,6 @@
                 {% if audio_url %}
                 <div class="audio_player">
                     <button class="play_btn" title="Reproducir">
-                        <!-- ▶️ SVG play -->
                         <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <polygon points="6 4 20 12 6 20 6 4"></polygon>
                         </svg>
@@ -468,271 +135,10 @@
         </div>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Control del reproductor de audio
-            {% if audio_url %}
-            const audio = document.getElementById('audioPlayer');
-            const playBtn = document.querySelector('.play_btn');
-            const progressFill = document.querySelector('.progress_fill');
-            const timeDisplay = document.querySelector('.time_display');
-            const volumeSlider = document.querySelector('.volume_slider');
-            const volumeFill = document.querySelector('.volume_fill');
-            console.log("se dispara?")
-    
-            // 1. Reproducción Automática y Display de Tiempo
-            audio.addEventListener('loadedmetadata', () => {
-                const total = formatTime(audio.duration);
-                timeDisplay.textContent = `0:00 / ${total}`;
-                console.log("Duración real:", total);
-                
-                // Intenta reproducir automáticamente (puede ser bloqueado por el navegador)
-                audio.play().catch(error => {
-                    console.log("Error de auto-reproducción:", error);
-                    // Si falla, el icono se queda en 'Play'
-                });
-            });
-    
-            // 2. Control de Icono: Cambia a PAUSA ⏸️ cuando el audio comienza a sonar
-            audio.addEventListener('play', () => {
-                playBtn.innerHTML = `
-                    <svg class="icon" xmlns="http://www.w3.org/2000/svg"
-                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="6" y="4" width="4" height="16"></rect>
-                        <rect x="14" y="4" width="4" height="16"></rect>
-                    </svg>`;
-            });
-    
-            // 3. Control de Icono: Cambia a PLAY ▶️ cuando el audio se detiene
-            audio.addEventListener('pause', () => {
-                playBtn.innerHTML = `
-                    <svg class="icon" xmlns="http://www.w3.org/2000/svg"
-                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <polygon points="6 4 20 12 6 20 6 4"></polygon>
-                    </svg>`;
-            });
-    
-            // 4. Control Manual: Alterna play/pause al hacer clic en el botón
-            playBtn.addEventListener('click', () => {
-                if (audio.paused) {
-                    audio.play();
-                } else {
-                    audio.pause();
-                }
-            });
-    
-            // 5. Barra de Progreso y Actualización de Tiempo
-            audio.addEventListener('timeupdate', () => {
-                const progress = (audio.currentTime / audio.duration) * 100;
-                progressFill.style.width = progress + '%';
-                
-                const current = formatTime(audio.currentTime);
-                const total = formatTime(audio.duration);
-                timeDisplay.textContent = `${current} / ${total}`;
-            });
-    
-            // 6. Control de Volumen (con inicialización)
-            audio.volume = 1; // Asegura que el audio inicie al 100% de volumen de la web
-            volumeFill.style.width = '100%';
-            
-            volumeSlider.addEventListener("click", (e) => {
-                const rect = volumeSlider.getBoundingClientRect();
-                const offsetX = e.clientX - rect.left;
-                const newVolume = Math.min(Math.max(offsetX / rect.width, 0), 1);
-                audio.volume = newVolume;
-                volumeFill.style.width = `${newVolume * 100}%`;
-            });
-    
-            // 7. Función Auxiliar para Formato de Tiempo
-            function formatTime(seconds) {
-                const mins = Math.floor(seconds / 60);
-                const secs = Math.floor(seconds % 60);
-                return `${mins}:${secs.toString().padStart(2, '0')}`;
-            }
-            {% endif %}
-    
-            // 8. Timestamp de la Interpretación (Ajustado)
-            const time = document.querySelector('.timestamp');
-            const ahora = new Date();
-            const fechaFormateada = ahora.toLocaleString('es-AR', {
-                dateStyle: 'short',
-                timeStyle: 'short'
-            });
-            time.textContent = `🕒 ${fechaFormateada}`; // Se ajusta el formato con el icono
-    
-            // 9. Botón de copiar
-            document.querySelector('.copy-btn')?.addEventListener('click', () => {
-                const text = document.querySelector('.interpretation_text').textContent;
-                navigator.clipboard.writeText(text);
-                alert('Texto copiado al portapapeles');
-            });
-        });
-    </script>
+    <div id="initial-lang-data" style="display: none;">
+        {{ current_lang if current_lang else 'en' }}
+    </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => { 
-            const downloadBtn = document.querySelector(".download_btn");
-            file_download = document.querySelector(".generated_image");
-
-            const imageUrl = file_download.src;
-
-            downloadBtn.addEventListener("click", async() => {
-                const response = await fetch(imageUrl);
-                const blob = await response.blob();
-
-                const blobUrl = URL.createObjectURL(blob);
-
-                // Crear enlace temporal invisible
-                const link = document.createElement('a');
-                link.href = blobUrl;
-                link.download = 'arte_emocional.png'; // nombre sugerido
-
-                // Disparar la descarga
-                document.body.appendChild(link);
-                link.click();
-
-                // Limpiar recursos
-                document.body.removeChild(link);
-                URL.revokeObjectURL(blobUrl);
-            })
-        })
-    </script>
+    <script src="static/js/index.js"></script>
 </body>
 </html>
-
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-
-        // 1. OBTENER EL IDIOMA INICIAL DESDE FLASK (Jinja)
-        // 'es' o 'en'. Si es la primera carga, será 'en'.
-        const initialLang = "{{ current_lang if current_lang else 'en' }}";
-
-        const btnLang = document.getElementById("btn-lang");
-        const langInput = document.getElementById("current-lang-input"); 
-        
-        // La lista de idiomas que tienes
-        const langs = ["es", "en"];
-        
-        // 2. ESTABLECER EL ÍNDICE INICIAL
-        // Busca la posición del idioma que viene de Flask (0 para 'es', 1 para 'en').
-        let langIndex = langs.indexOf(initialLang); 
-        // Si el valor no se encuentra (debería ser imposible, pero por seguridad) o es la primera carga:
-        if (langIndex === -1) { 
-            langIndex = 1; // Default a 'en'
-        }
-
-        // -------------------------------------------------------------
-        // Nota: Mantuve el objeto 'textos' y la función 'setLanguage' intactas
-        // -------------------------------------------------------------
-        
-        const textos = {
-            es: {
-                flag: "🇪🇸",
-                crearArte: "Crear Arte Emocional",
-                emocion: "Emoción",
-                placeholderEmocion: "Ej: Tristeza, Alegría, Misterio",
-                elemento: "Elemento",
-                placeholderElemento: "Ej: Océano tempestuoso, Bosque, Fuego",
-                generar: "Generar Arte",
-                imagenGenerada: "Imagen Generada",
-                generarImgPlaceholder: "Genera una imagen para verla aquí",
-                narracion: "Narración de Audio",
-                generarAudioPlaceholder: "Genera audio para reproducirlo aquí",
-                interpretacion: "Interpretación de Gemini AI",
-                interpretacionPlaceholder: "Genera una interpretación para verla aquí",
-                copiar: "📋 Copiar",
-            },
-            
-            en: {
-                flag: "🇺🇸",
-                crearArte: "Create Emotional Art",
-                emocion: "Emotion",
-                placeholderEmocion: "E.g.: Sadness, Joy, Mystery",
-                elemento: "Element",
-                placeholderElemento: "E.g.: Stormy ocean, Forest, Fire",
-                generar: "Generate Art",
-                imagenGenerada: "Generated Image",
-                generarImgPlaceholder: "Generate an image to display here",
-                narracion: "Audio Narration",
-                generarAudioPlaceholder: "Generate audio to play here",
-                interpretacion: "Gemini AI Interpretation",
-                interpretacionPlaceholder: "Generate an interpretation to see it here",
-                copiar: "📋 Copy",
-            }
-        };
-        
-        // Función de traducción (tu código original)
-        function setLanguage(lang) {
-            const t = textos[lang];
-            btnLang.textContent = t.flag;
-            
-            // Título principal
-            document.getElementById("card_title_h3").textContent = t.crearArte;
-            
-            // Labels del formulario
-            document.querySelectorAll(".form_entryInput label")[0].innerHTML = `<div class="label_icon heart"></div>${t.emocion}`;
-            document.querySelectorAll(".form_entryInput label")[1].innerHTML = `<div class="label_icon wave"></div>${t.elemento}`;
-            
-            // Placeholders
-            document.querySelector("input[name='emocion']").placeholder = t.placeholderEmocion;
-            document.querySelector("input[name='elemento']").placeholder = t.placeholderElemento;
-            
-            // Botón de generar
-            document.querySelector(".generate_btn").textContent = t.generar;
-            
-            // Sección imagen generada
-            document.querySelectorAll(".card_title .icon")[1].nextSibling.textContent = t.imagenGenerada;
-            const imgPlaceholder = document.querySelector(".right_column .card:nth-child(1) .placeholder");
-            if (imgPlaceholder) imgPlaceholder.textContent = t.generarImgPlaceholder;
-            
-            // Sección narración
-            document.querySelectorAll(".card_title .icon")[3].nextSibling.textContent = t.narracion;
-            const audioPlaceholder = document.querySelector(".right_column .card:nth-child(2) .placeholder");
-            if (audioPlaceholder) audioPlaceholder.textContent = t.generarAudioPlaceholder;
-            
-            // Sección interpretación
-            document.querySelectorAll(".card_title .icon")[2].nextSibling.textContent = t.interpretacion;
-            const interpPlaceholder = document.querySelector(".right_column .card:nth-child(3) .placeholder");
-            if (interpPlaceholder) interpPlaceholder.textContent = t.interpretacionPlaceholder;
-            
-            // Mensaje de éxito (si existe)
-            
-            // Footer de interpretación (si existe)
-            
-            const copyBtn = document.querySelector(".copy-btn");
-            if (copyBtn) copyBtn.textContent = t.copiar;
-        }
-
-        // 3. 🚨 CONFIGURACIÓN INICIAL
-        // Aplica el idioma que vino de Flask/Jinja
-        const currentLang = langs[langIndex];
-        setLanguage(currentLang);
-        
-        // Establece el valor inicial del input oculto que se envía a Flask
-        if (langInput) {
-            langInput.value = currentLang;
-        }
-
-
-        // 4. CORRECCIÓN DEL EVENT LISTENER
-        btnLang.addEventListener("click", () => {
-            // El índice se incrementa y vuelve al inicio (0 -> 1 -> 0...)
-            langIndex = (langIndex + 1) % langs.length;
-            const newLang = langs[langIndex]; 
-
-            // Aplica el nuevo idioma a toda la interfaz
-            setLanguage(newLang);
-
-            // 🚨 SOLUCIÓN: Actualiza el VALOR del input oculto (no el textContent)
-            if (langInput) {
-                langInput.value = newLang;
-            }
-            
-            // La línea document.getElementById("current-lang-input").textContent =  ESTABA VACÍA Y ES INCORRECTA
-            // Fue reemplazada por la lógica de actualización de 'langInput.value'
-        });
-        
-    });
-    </script>
